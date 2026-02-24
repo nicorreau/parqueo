@@ -1,0 +1,95 @@
+/* === Estilos Pantalla Principal === */
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background-color: #f5f6fa;
+  color: #333;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Encabezado --- */
+header {
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  color: #fff;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #dbeafe;
+}
+
+/* --- Cuerpo principal --- */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e5e7eb;
+  padding: 20px;
+}
+
+/* --- Panel central --- */
+.panel {
+  background: #fff;
+  padding: 60px 80px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.panel h2 {
+  color: #3b82f6;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.panel p {
+  color: #555;
+  font-size: 16px;
+}
+
+/* --- Adaptación móvil --- */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .panel {
+    width: 90%;
+    padding: 40px 20px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

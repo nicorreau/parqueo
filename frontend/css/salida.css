@@ -1,0 +1,190 @@
+/* === BASE (Heredada de tu estilo actual) === */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    background-color: #e5e7eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+  
+.form-wrapper {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 50px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px 50px;
+    max-width: 900px; /* Un poco más ancho para que quepa bien la info */
+    width: 90%;
+}
+  
+.form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    color: #2b2bff; /* Tu azul principal */
+    margin-bottom: 25px;
+}
+
+/* === ESTILOS ESPECÍFICOS DE SALIDA === */
+
+/* Buscador */
+.search-section {
+    margin-bottom: 20px;
+}
+
+.search-section label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.search-box button {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.search-box button:hover {
+    background-color: #2563eb;
+}
+
+/* Tarjeta de Resultados (Ticket) */
+.result-card {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1; /* Borde punteado estilo ticket */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Clase para ocultar elementos */
+.hidden {
+    display: none;
+}
+
+.result-card h3 {
+    margin-top: 0;
+    color: #475569;
+    font-size: 18px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #555;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #cbd5e1;
+    font-size: 22px;
+    color: #16a34a; /* Verde dinero */
+}
+
+/* Botones de acción */
+.actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-pagar {
+    flex: 1;
+    background-color: #16a34a; /* Verde confirmación */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-pagar:hover {
+    background-color: #15803d;
+}
+
+.btn-cancelar {
+    background-color: #ef4444; /* Rojo cancelar */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-volver {
+    background-color: #2b7a78; /* Tu color actual de volver */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: auto; 
+    align-self: flex-start;
+}
+
+/* Imagen Lateral (Igual que registro) */
+.form-image {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-left: 2px solid #e5e7eb;
+    padding-left: 40px;
+}
+
+.form-image img {
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .form-wrapper { flex-direction: column; padding: 20px; }
+    .form-image { border-left: none; border-top: 2px solid #e5e7eb; padding-top: 20px; padding-left: 0; }
+}

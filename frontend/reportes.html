@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reportes y Estadísticas</title>
+    <link rel="stylesheet" href="css/reportes.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Panel de Reportes</h1>
+        <nav>
+            <ul>
+                <li><a href="main.html">Inicio</a></li>
+                <li><a href="registro.html">Registro de Vehículos</a></li>
+                <li><a href="salida.html">Salida</a></li>
+                <li><a href="reportes.html" class="active">Reportes</a></li>
+                <li><a href="javascript:void(0)" onclick="logout()">Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="report-container">
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Recaudo Total</h3>
+                <p id="total-dinero" class="stat-value">$ 0.00</p>
+                <span class="stat-label">Hoy</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>Vehículos Hoy</h3>
+                <p id="total-vehiculos" class="stat-value">0</p>
+                <span class="stat-label">Ingresos registrados</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>Ocupación Actual</h3>
+                <p id="ocupacion-actual" class="stat-value">0%</p>
+                <div class="progress-bar">
+                    <div id="bar-width" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="table-section">
+            <h3>Últimos Movimientos</h3>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Placa</th>
+                        <th>Ingreso</th>
+                        <th>Salida</th>
+                        <th>Total Pagado</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-reporte-body">
+                </tbody>
+            </table>
+        </section>
+
+        </section>
+
+        <button class="btn-volver" type="button" onclick="location.href='main.html'">← Volver a la página
+            principal</button>
+
+    </main>
+
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Ejecutar al cargar la página
+        document.addEventListener("DOMContentLoaded", cargarReportesSimulados);
+    </script>
+</body>
+
+</html>

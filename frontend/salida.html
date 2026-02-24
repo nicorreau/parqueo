@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Control de Salida</title>
+  <link rel="stylesheet" href="css/salida.css">
+  </head>
+<body>
+
+  <div class="form-wrapper">
+    
+    <div class="form-container">
+      <h2>Control de Salida & Facturación</h2>
+      
+      <div class="search-section">
+        <label>Buscar Vehículo por Placa:</label>
+        <div class="search-box">
+          <input type="text" id="buscarPlaca" placeholder="Ej: ABC123" maxlength="7">
+          <button type="button" onclick="buscarVehiculo()">🔍 Buscar</button>
+        </div>
+      </div>
+
+      <div id="resultado-card" class="result-card hidden">
+        <h3>Detalles del Cobro</h3>
+        
+        <div class="ticket-info">
+            <div class="info-row">
+                <span>Placa:</span>
+                <strong id="res-placa">---</strong>
+            </div>
+            <div class="info-row">
+                <span>Vehículo:</span>
+                <span id="res-desc">---</span>
+            </div>
+            <div class="info-row">
+                <span>Hora Ingreso:</span>
+                <span id="res-ingreso">---</span>
+            </div>
+            <div class="info-row">
+                <span>Tiempo Total:</span>
+                <span id="res-tiempo">---</span>
+            </div>
+        </div>
+
+        <div class="total-row">
+          <span>Total a Pagar:</span>
+          <strong id="res-total">$ 0.00</strong>
+        </div>
+
+        <div class="actions">
+          <button class="btn-pagar" onclick="procesarSalida()">💸 Confirmar Pago y Salida</button>
+          <button class="btn-cancelar" onclick="limpiarBusqueda()">Cancelar</button>
+        </div>
+      </div>
+  
+      <button class="btn-volver" onclick="location.href='main.html'">← Volver al Panel Principal</button>
+    </div>
+
+    <div class="form-image">
+      <p>Consulta tarifas y procesa salidas rápidamente.</p>
+      <img src="imgs/login-img.png" alt="Decoración lateral">
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
