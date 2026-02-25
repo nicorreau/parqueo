@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Registro de Vehículos</title>
   <link rel="stylesheet" href="css/registro.css">
 </head>
+
 <body>
 
-
   <div class="form-wrapper">
-    
+
     <div class="form-container">
       <h2>Registro de Vehículos</h2>
-      <form>
+      <form id="form-registro">
         <label>No. Placa:</label>
-        <input type="text" placeholder="ABC123">
-        
+        <input type="text" placeholder="ABC123" id="reg-placa">
+
         <label>Descripción:</label>
-        <input type="text" placeholder="Modelo, características...">
-        
+        <input type="text" placeholder="Modelo, características..." id="reg-descripcion">
+
         <label>Tipo:</label>
-        <select><option>Seleccionar</option><option>Carro</option><option>Moto</option></select>
-        
+        <input type="text" id="reg-tipo" list="lista-tipos" placeholder="Escribe o selecciona...">
+        <datalist id="lista-tipos"></datalist>
+
         <label>Marca:</label>
-        <select><option>Seleccionar</option><option>Chevrolet</option><option>Kia</option><option>Yamaha</option></select>
-        
+        <input type="text" id="reg-marca" list="lista-marcas" placeholder="Escribe o selecciona...">
+        <datalist id="lista-marcas"></datalist>
+
         <label>Color:</label>
-        <select><option>Seleccionar</option><option>Rojo</option><option>Negro</option><option>Blanco</option></select>
-        
+        <input type="text" id="reg-color" list="lista-colores" placeholder="Escribe o selecciona...">
+        <datalist id="lista-colores"></datalist>
+
         <label>DNI/CC:</label>
-        <input type="text" placeholder="Documento del propietario">
-        
+        <input type="text" id="reg-dni" placeholder="Documento del propietario">
+
         <label>Nombre:</label>
-        <input type="text" placeholder="Nombre del propietario">
-        
+        <input type="text" id="reg-nombre" placeholder="Nombre del propietario">
+
         <label>Observación:</label>
-        <textarea></textarea>
-        
-        <button type="submit">Registrar vehículo & guardar ingreso</button>
+        <textarea id="reg-observacion"></textarea>
+
+        <button type="button" onclick="registrarVehiculo()">Registrar vehículo & guardar ingreso</button>
       </form>
-  
+
       <button class="btn-volver" onclick="location.href='main.html'">← Volver a la página principal</button>
-  
-     
 
-  </div>
- <!-- Imagen lateral -->
-        <div class="form-image">
-          <p>Gestiona el acceso de vehículos al parking ahora!!!</p>
-          <img src="imgs/login-img.png" alt="Decoración lateral">
-        </div>
-      </div>
+    </div>
+
+    <div class="form-image">
+      <p>Gestiona el acceso de vehículos al parking ahora!!!</p>
+      <img src="imgs/login-img.png" alt="Decoración lateral">
+    </div>
   </div>
 
+  <script src="js/registro.js"></script>
 </body>
+
 </html>
