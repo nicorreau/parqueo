@@ -52,18 +52,19 @@ public class VehiculoController {
 @PostMapping("/registro-completo")
 public MovimientoVehiculo registroCompleto(@RequestBody Map<String, Object> data) {
 
-    // --- NUEVO ESCUDO 1: Validación de Nombres Obligatorios ---
-    // Ahora validamos que el texto no llegue nulo desde el JS
-    if (data.get("nombre_marca") == null || data.get("nombre_color") == null || data.get("nombre_tipo") == null) {
-        throw new RuntimeException("ERROR: Marca, Color y Tipo son campos obligatorios.");
+    // 1. Validación de campos obligatorios
+    if (data.get("nombre_marca") == null || data.get("nombre_color") == null || data.get("nombre_tipo") == null || data.get("placa") == null) {
+        throw new RuntimeException("ERROR: Placa, Marca, Color y Tipo son obligatorios.");
     }
 
-    // 1. Validar y Obtener Propietario (Se mantiene igual que tu código original)
+    // 2. Gestión del Propietario (EVITA EL ERROR DE DUPLICADO)
     Map<String, Object> propData = (Map<String, Object>) data.get("propietario");
     if (propData == null || propData.get("dni") == null) {
         throw new RuntimeException("ERROR: Los datos del propietario (DNI) son obligatorios.");
     }
-    String dni = propData.get("dni").toString();
+    
+    String dni = propData.get("dni").toString().trim();
+    // Buscamos primero para no intentar insertar un DNI que ya existe
     Propietario propietario = propietarioRepository.findByDni(dni);
 
     if (propietario == null) {
@@ -73,52 +74,57 @@ public MovimientoVehiculo registroCompleto(@RequestBody Map<String, Object> data
         propietario = propietarioRepository.save(propietario);
     }
 
-    // 2. Validar y Obtener Vehículo
-    String placa = (String) data.get("placa");
-    if (placa == null || placa.trim().isEmpty()) {
-        throw new RuntimeException("ERROR: La placa es obligatoria.");
-    }
-
+    // 3. Gestión del Vehículo (SOLUCIONA TYPE MISMATCH)
+    String placa = data.get("placa").toString().toUpperCase().trim();
     Vehiculo vehiculo = vehiculoRepository.findByPlaca(placa).orElse(null);
 
     if (vehiculo == null) {
         vehiculo = new Vehiculo();
         vehiculo.setPlaca(placa);
-        vehiculo.setDescripcion((String) data.get("descripcion"));
-        vehiculo.setObservaciones((String) data.get("observaciones"));
-        vehiculo.setPropietario(propietario);
-
-        // --- NUEVA LÓGICA: Busca por nombre o Crea si no existe ---
-        // Esto evita que el sistema se rompa si el usuario escribe algo nuevo
-        
-        String nMarca = data.get("nombre_marca").toString().toUpperCase().trim();
-        vehiculo.setMarca(marcaRepository.findByNombre(nMarca).orElseGet(() -> {
-            Marca nueva = new Marca();
-            nueva.setNombre(nMarca);
-            return marcaRepository.save(nueva);
-        }));
-
-        String nColor = data.get("nombre_color").toString().toUpperCase().trim();
-        vehiculo.setColor(colorRepository.findByNombre(nColor).orElseGet(() -> {
-            Color nuevo = new Color();
-            nuevo.setNombre(nColor);
-            return colorRepository.save(nuevo);
-        }));
-
-        String nTipo = data.get("nombre_tipo").toString().toUpperCase().trim();
-        vehiculo.setTipoVehiculo(tipoVehiculoRepository.findByNombre(nTipo).orElseGet(() -> {
-            TipoVehiculo nuevo = new TipoVehiculo();
-            nuevo.setNombre(nTipo);
-            return tipoVehiculoRepository.save(nuevo);
-        }));
-
-        vehiculo = vehiculoRepository.save(vehiculo);
     }
 
-    // 3. Crear el Ingreso Automático (Se mantiene igual que tu código original)
+    // Actualizamos siempre estas relaciones para asegurar que el vehículo esté completo
+    vehiculo.setDescripcion((String) data.get("descripcion"));
+    vehiculo.setObservaciones((String) data.get("observaciones"));
+    vehiculo.setPropietario(propietario);
+
+    // Lógica para Marca
+    String nMarca = data.get("nombre_marca").toString().toUpperCase().trim();
+    Marca marca = marcaRepository.findByNombre(nMarca).orElse(null);
+    if (marca == null) {
+        marca = new Marca();
+        marca.setNombre(nMarca);
+        marca = marcaRepository.save(marca);
+    }
+    vehiculo.setMarca(marca);
+
+    // Lógica para Color
+    String nColor = data.get("nombre_color").toString().toUpperCase().trim();
+    Color color = colorRepository.findByNombre(nColor).orElse(null);
+    if (color == null) {
+        color = new Color();
+        color.setNombre(nColor);
+        color = colorRepository.save(color);
+    }
+    vehiculo.setColor(color);
+
+    // Lógica para Tipo (CRUCIAL PARA LA TARIFA)
+    String nTipo = data.get("nombre_tipo").toString().toUpperCase().trim();
+    TipoVehiculo tipo = tipoVehiculoRepository.findByNombre(nTipo).orElse(null);
+    if (tipo == null) {
+        tipo = new TipoVehiculo();
+        tipo.setNombre(nTipo);
+        tipo = tipoVehiculoRepository.save(tipo);
+    }
+    vehiculo.setTipoVehiculo(tipo);
+
+    // Guardamos el vehículo (nuevo o actualizado)
+    vehiculo = vehiculoRepository.save(vehiculo);
+
+    // 4. Crear el Movimiento de Ingreso
     boolean estaDentro = movimientoVehiculoRepository.findByVehiculoPlacaAndSalidaIsNull(placa).isPresent();
     if (estaDentro) {
-        throw new RuntimeException("El vehículo con placa " + placa + " ya se encuentra dentro del parqueadero.");
+        throw new RuntimeException("El vehículo con placa " + placa + " ya se encuentra dentro.");
     }
 
     MovimientoVehiculo movimiento = new MovimientoVehiculo();
