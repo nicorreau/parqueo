@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Configuración de Tarifas</title>
+    <link rel="stylesheet" href="css/tarifas.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>⚙️ Configuración de Tarifas</h2>
+        <form id="formTarifa">
+            <label>Tipo de Vehículo:</label>
+            <div class="input-group">
+                <label>Tipo de Vehículo</label>
+                <select id="id_tipo" required>
+                    <option value="">Cargando tipos...</option>
+                </select>
+            </div>
+
+            <label>Precio por Hora ($):</label>
+            <input type="number" id="valorTarifa" placeholder="Ej: 2000" required>
+
+            <label>IVA (%):</label>
+            <input type="number" id="valorTax" value="19" required>
+
+            <button type="submit" class="btn-registrar">Guardar Tarifa</button>
+        </form>
+        <br>
+        <a href="main.html" class="btn-volver">← Volver al Panel</a>
+    </div>
+    <script src="js/tarifas.js"></script>
+</body>
+
+</html>

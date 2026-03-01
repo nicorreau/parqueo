@@ -188,3 +188,8 @@ h2 {
     .form-wrapper { flex-direction: column; padding: 20px; }
     .form-image { border-left: none; border-top: 2px solid #e5e7eb; padding-top: 20px; padding-left: 0; }
 }
+
+/* Esta clase oculta cualquier elemento que la tenga */
+.hidden {
+    display: none !important;
+}
